@@ -153,5 +153,27 @@ d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geoj
 
 
 // Accessing the tectonic plate GeoJSON URL
-let torontoHoods = "https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_boundaries.json"
+let tectonic = "https://raw.githubusercontent.com/fraxen/tectonicplates/master/GeoJSON/PB2002_boundaries.json"
+
+// Create a style for the lines.
+let myStyle = {
+	color: "#8E44AD",
+	lineweight: 5
+}
+
+d3.json(tectonic).then(function(data) {
+	console.log(data);
+	// Creating a GeoJSON layer with the retrieved data
+	L.geoJson(data, {
+		style: myStyle,
+		onEachFeature: function(feature, layer) {
+			layer.bindPopup("<h3>" + "Airline: " + feature.properties.airline + "</h3> <hr>" + "<h3>" + "Destination: " + feature.properties.dst + "</h3>"); 
+		}	
+	})
+	.addTo(tectonicPlates);
+
+	// Then we add the tectonic plates layer to our map.
+	tectonicPlates.addTo(map);
+
+});
 
