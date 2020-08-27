@@ -19,3 +19,6 @@ The goals of this challenge are to:
 * Leaflet
 * D3
 * mapbox
+
+## Note
+The final copies of the code files are located in the [Earthquake_Challenge](/Earthquake_Challenge) directory.  
