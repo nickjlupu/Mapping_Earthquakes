@@ -22,7 +22,7 @@ attribution: 'Map data © <a href="https://www.openstreetmap.org/">OpenStreetMap
 	accessToken: API_KEY
 });
 
-// Create a base layer that holds both maps.
+// Create a base layer that holds all 3 maps.
 let baseMaps = {
 	"Streets": streets,
 	"Satellite Streets": satelliteStreets,
@@ -103,7 +103,6 @@ d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geoj
 	L.geoJson(data, {
 		// We turn each feature into a circleMarker on the map.
 		pointToLayer: function(feature, latlng) {
-					console.log(data);
 					return L.circleMarker(latlng);
 				},
 			// We set the style for each circleMarker by calling the styleInfo function
@@ -165,10 +164,7 @@ d3.json(tectonic).then(function(data) {
 	console.log(data);
 	// Creating a GeoJSON layer with the retrieved data
 	L.geoJson(data, {
-		style: myStyle,
-		onEachFeature: function(feature, layer) {
-			layer.bindPopup("<h3>" + "Airline: " + feature.properties.airline + "</h3> <hr>" + "<h3>" + "Destination: " + feature.properties.dst + "</h3>"); 
-		}	
+		style: myStyle
 	})
 	.addTo(tectonicPlates);
 
