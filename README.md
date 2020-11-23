@@ -23,6 +23,8 @@
 ## Description
 A base layer is generated using Mapbox to hold the three base map styles.  Overlays are added for the earthquake & tectonic plate data.  These data are obtained by making separate API calls using d3.json() (sources noted in the Resources section).  The earthquake data is drilled down into to obtain the magnitude of each instance.  This parameter is passed into functions to style the circle markers with both size and color based on the magnitude.  
 
+Deployed page:  [https://nickjlupu.github.io/Mapping_Earthquakes/](https://nickjlupu.github.io/Mapping_Earthquakes/)
+
 ## Recommendations / Next Steps
 * Add date and time to popups 
 
