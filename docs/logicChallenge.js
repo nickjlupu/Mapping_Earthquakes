@@ -22,7 +22,7 @@ attribution: 'Map data © <a href="https://www.openstreetmap.org/">OpenStreetMap
 	accessToken: API_KEY
 });
 
-// Create a base layer that holds both maps.
+// Create a base layer that holds all 3 maps.
 let baseMaps = {
 	"Streets": streets,
 	"Satellite Streets": satelliteStreets,
@@ -98,7 +98,7 @@ d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geoj
 		}
 		return magnitude * 4;
 	}
-		
+	
 	function popupDate(feature){
 		let display = Date(feature * 1000);
 		console.log(display) 
@@ -108,14 +108,17 @@ d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geoj
 	// Creating a GeoJSON layer with the retrieved data.
 	L.geoJson(data, {
 		// We turn each feature into a circleMarker on the map.
+		
 		pointToLayer: function(feature, latlng) {
 					console.log(data);
+					
 					return L.circleMarker(latlng);
 				},
 			// We set the style for each circleMarker by calling the styleInfo function
 			style: styleInfo,
 			// We create a popup for each circleMarker to display the magnitude and
 			// location of the earthquake after the marker has been created and styled.
+			
 			onEachFeature: function(feature, layer) {
 				layer.bindPopup("Magnitude: " + feature.properties.mag + "<br>Location: " + feature.properties.place + "<br>Date: " + popupDate(feature.properties.time));
 			}
@@ -145,7 +148,6 @@ d3.json("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geoj
 
 		// Looping through our intervals to generate a label with a colored square for each interval.
 		for (var i = 0; i < magnitudes.length; i++) {
-			console.log(colors[i]);
 			div.innerHTML +=
 			"<i style='background: " + colors[i] + "'></i> " +
 			magnitudes[i] + (magnitudes[i + 1] ? "&ndash;" + magnitudes[i + 1] + "<br>" : "+");
@@ -171,7 +173,7 @@ d3.json(tectonic).then(function(data) {
 	console.log(data);
 	// Creating a GeoJSON layer with the retrieved data
 	L.geoJson(data, {
-		style: myStyle	
+		style: myStyle
 	})
 	.addTo(tectonicPlates);
 
@@ -179,4 +181,5 @@ d3.json(tectonic).then(function(data) {
 	tectonicPlates.addTo(map);
 
 });
+
 
